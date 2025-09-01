@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', views.mostrar_bievenida),
     path('quepasa/', views.que_pasa),
+    path('productos/', views.lista_productos, name='lista_producto')
 ]
