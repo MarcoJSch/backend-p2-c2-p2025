@@ -33,3 +33,17 @@ def producto_update(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
     if request.method == 'POST':
         form = ProductoForm(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('producto_list')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'inventario/producto_form.html', {'form':form})
+
+# DELETE
+def producto_delete(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('producto_list')
+    return render(request, 'inventario/producto_confirm_delete.html', {'object': producto})
